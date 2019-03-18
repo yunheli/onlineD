@@ -60,5 +60,28 @@ pipeline {
         }
       }
     }
+
+    stage('parallel') {
+      parallel {
+        stage('Stage2.1') {
+            steps {
+                timestamps {
+                    echo "在 agent test2 上执行的并行任务 1."
+                    sleep 5
+                    echo "在 agent test2 上执行的并行任务 1 结束."
+                }
+            }
+        }
+        stage('Stage2.2') {
+            steps {
+                timestamps {
+                    echo "在 agent test3 上执行的并行任务 2."
+                    sleep 10
+                    echo "在 agent test3 上执行的并行任务 2 结束."
+                }
+            }
+        }
+      }
+    }
   }
 }
